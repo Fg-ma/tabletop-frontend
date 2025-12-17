@@ -103,7 +103,7 @@ export type IncomingTableMessages =
   | onUserJoinedTableType
   | onUserLeftTableType
   | onSeatsMovedType
-  | onSeatsSwapedType
+  | onSeatsSwappedType
   | onKickedFromTableType
   | onReactionOccurredType;
 
@@ -123,11 +123,7 @@ export type onUserJoinedTableType = {
 
 export type onUserLeftTableType = {
   type: "userLeftTable";
-  data: {
-    userData: {
-      [username: string]: { color: TableColors; seat: number; online: boolean };
-    };
-  };
+  header: { username: string; online: boolean };
 };
 
 export type onSeatsMovedType = {
@@ -139,21 +135,18 @@ export type onSeatsMovedType = {
   };
 };
 
-export type onSeatsSwapedType = {
-  type: "seatsSwaped";
+export type onSeatsSwappedType = {
+  type: "seatsSwapped";
   data: {
-    userData: {
-      [username: string]: { color: TableColors; seat: number; online: boolean };
-    };
+    username: string;
+    targetUsername: string;
   };
 };
 
 export type onKickedFromTableType = {
   type: "kickedFromTable";
   data: {
-    userData: {
-      [username: string]: { color: TableColors; seat: number; online: boolean };
-    };
+    targetUsername: string;
   };
 };
 

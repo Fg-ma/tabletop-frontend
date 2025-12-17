@@ -2,7 +2,7 @@ import {
   IncomingTableMessages,
   onKickedFromTableType,
   onSeatsMovedType,
-  onSeatsSwapedType,
+  onSeatsSwappedType,
   onUserJoinedTableType,
   onUserLeftTableType,
   TableColors,
@@ -82,8 +82,8 @@ class TableController {
       case "seatsMoved":
         this.onSeatsMoved(event);
         break;
-      case "seatsSwaped":
-        this.onSeatsSwaped(event);
+      case "seatsSwapped":
+        this.onSeatsSwapped(event);
         break;
       case "kickedFromTable":
         this.onKickedFromTableType(event);
@@ -100,9 +100,13 @@ class TableController {
   };
 
   private onUserLeftTable = (event: onUserLeftTableType) => {
-    const { userData } = event.data;
+    const { username, online } = event.header;
 
-    this.setUserData(userData);
+    this.setUserData((prev) => {
+      const newUserData = { ...prev };
+      if (newUserData[username]) newUserData[username].online = online;
+      return newUserData;
+    });
   };
 
   private onSeatsMoved = (event: onSeatsMovedType) => {
@@ -111,16 +115,27 @@ class TableController {
     this.setUserData(userData);
   };
 
-  private onSeatsSwaped = (event: onSeatsSwapedType) => {
-    const { userData } = event.data;
+  private onSeatsSwapped = (event: onSeatsSwappedType) => {
+    const { username, targetUsername } = event.data;
 
-    this.setUserData(userData);
+    this.setUserData((prev) => {
+      const newUserData = { ...prev };
+      const userSeat = newUserData[username].seat;
+      const targetSeat = newUserData[targetUsername].seat;
+      newUserData[username].seat = targetSeat;
+      newUserData[targetUsername].seat = userSeat;
+      return newUserData;
+    });
   };
 
   private onKickedFromTableType = (event: onKickedFromTableType) => {
-    const { userData } = event.data;
+    const { targetUsername } = event.data;
 
-    this.setUserData(userData);
+    this.setUserData((prev) => {
+      const newUserData = { ...prev };
+      delete newUserData[targetUsername];
+      return newUserData;
+    });
   };
 }
 
