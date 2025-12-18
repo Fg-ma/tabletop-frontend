@@ -11,8 +11,6 @@ concurrently \
   "./nginx-1.27.3/sbin/nginx -p ./liveTextEditingServer/nginx -c nginx.conf" \
   "npm run dev --prefix ./videoServer" \
   "./nginx-1.27.3/sbin/nginx -p ./videoServer/nginx -c nginx.conf" \
-  "npm run dev --prefix ./gamesServer" \
-  "./nginx-1.27.3/sbin/nginx -p ./gamesServer/nginx -c nginx.conf" \
   "npm run dev --prefix ./cephServer" \
   "npm run dev --prefix ./redisServer" \
   "npm run dev --prefix ./elasticSearchServer" \
