@@ -30,6 +30,9 @@ import LiveTextDownloader from "../../tools/liveTextDownloader/LiveTextDownloade
 import VideoSocketController from "../../serverControllers/videoServer/VideoSocketController";
 import { GeneralSignals } from "../../context/signalContext/lib/typeConstant";
 
+const tableServerIp = process.env.TABLE_SERVER_IP;
+const tableServerPort = process.env.TABLE_SERVER_PORT;
+
 class JoinTableSectionController {
   constructor(
     private tableSocket: React.MutableRefObject<
@@ -129,7 +132,7 @@ class JoinTableSectionController {
       }
 
       this.tableSocket.current = new TableSocketController(
-        "wss://localhost:7778",
+        `wss://${tableServerIp}:${tableServerPort}/ws/${this.tableId.current}/${this.username.current}/${this.instance.current}`,
         this.tableId.current,
         this.username.current,
         this.instance.current,

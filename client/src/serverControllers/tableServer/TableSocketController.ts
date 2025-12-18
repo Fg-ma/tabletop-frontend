@@ -40,8 +40,16 @@ class TableSocketController {
   private connect = (url: string) => {
     this.ws = new WebSocket(url);
 
-    this.ws.onmessage = (event: MessageEvent) => {
-      const message = JSON.parse(event.data);
+    this.ws.onmessage = async (event: MessageEvent) => {
+      let data: string;
+
+      if (event.data instanceof Blob) {
+        data = await event.data.text();
+      } else {
+        data = event.data;
+      }
+
+      const message = JSON.parse(data);
 
       this.messageListeners.forEach((listener) => {
         listener(message as IncomingTableMessages);

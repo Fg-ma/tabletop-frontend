@@ -52,8 +52,8 @@ export default function RightTableSection({
           placement="right"
           src={hamster_64x64}
           srcLoading={hamster_64x64}
-          primaryColor={tableColorMap[user[1].color].primary}
-          secondaryColor={tableColorMap[user[1].color].secondary}
+          primaryColor={tableColorMap[user[1].color]?.primary}
+          secondaryColor={tableColorMap[user[1].color]?.secondary}
         />
       ))}
       <div></div>
