@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import GamePlayerIcon from "./lib/GamePlayerIcon";
+import FgGameController from "../FgGameController";
 
 export default function PlayersSection({
   players,
+  fgGameController,
 }: {
   players?: {
     user?: {
@@ -16,6 +18,7 @@ export default function PlayersSection({
       shadowColor?: { r: number; g: number; b: number };
     }[];
   };
+  fgGameController: FgGameController;
 }) {
   const [isHover, setIsHover] = useState(false);
   const playersSectionRef = useRef<HTMLDivElement>(null);
@@ -49,10 +52,16 @@ export default function PlayersSection({
   return (
     <div
       ref={playersSectionRef}
-      className='hide-scroll-bar overflow-y-auto z-10 w-full py-2 min-h-14'
+      onPointerEnter={() =>
+        fgGameController.handlePointerEnter("buttons", playersSectionRef)
+      }
+      onPointerLeave={() =>
+        fgGameController.handlePointerLeave("buttons", playersSectionRef)
+      }
+      className="hide-scroll-bar z-10 min-h-14 w-full overflow-y-auto py-2"
     >
       <div
-        className='flex flex-col items-center justify-end w-full h-max space-y-2 px-2'
+        className="flex h-max w-full flex-col items-center justify-end space-y-2 px-2"
         onPointerEnter={handlePointerEnter}
         onPointerLeave={handlePointerLeave}
         onWheel={(event) => {

@@ -51,6 +51,7 @@ export default function FgGame({
   popupRefs,
   initPositioning,
   setPositioning,
+  contentRef,
 }: {
   tableTopRef: React.RefObject<HTMLDivElement>;
   externalHideControls?: boolean;
@@ -88,6 +89,7 @@ export default function FgGame({
     scale: { x: number; y: number };
     rotation: number;
   }) => void;
+  contentRef?: React.RefObject<HTMLDivElement>;
 }) {
   const { tableId } = useUserInfoContext();
   const { userDataStreams, remoteDataStreams } = useMediaContext();
@@ -119,6 +121,9 @@ export default function FgGame({
   const [adjustingDimensions, setAdjustingDimensions] = useState(false);
   const [reactionsPanelActive, setReactionsPanelActive] = useState(false);
   const gameRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const reactBtnRef = useRef<HTMLDivElement>(null);
+  const endGameBtnRef = useRef<HTMLButtonElement>(null);
   const panBtnRef = useRef<HTMLButtonElement>(null);
   const rotationBtnRef = useRef<HTMLButtonElement>(null);
   const scaleBtnRef = useRef<HTMLButtonElement>(null);
@@ -294,15 +299,43 @@ export default function FgGame({
     };
   }, [selected]);
 
+  useEffect(() => {
+    if (contentRef) {
+      contentRef.current?.addEventListener("pointerenter", () =>
+        fgGameController.handlePointerEnter("main", contentRef),
+      );
+      contentRef.current?.addEventListener("pointerleave", () =>
+        fgGameController.handlePointerLeave("main", contentRef),
+      );
+    }
+    endGameBtnRef.current?.addEventListener("pointerenter", () =>
+      fgGameController.handlePointerEnter("buttons", endGameBtnRef),
+    );
+    endGameBtnRef.current?.addEventListener("pointerleave", () =>
+      fgGameController.handlePointerLeave("buttons", endGameBtnRef),
+    );
+
+    return () => {
+      if (contentRef) {
+        contentRef.current?.removeEventListener("pointerenter", () =>
+          fgGameController.handlePointerEnter("main", contentRef),
+        );
+        contentRef.current?.removeEventListener("pointerleave", () =>
+          fgGameController.handlePointerLeave("main", contentRef),
+        );
+      }
+      endGameBtnRef.current?.removeEventListener("pointerenter", () =>
+        fgGameController.handlePointerEnter("buttons", endGameBtnRef),
+      );
+      endGameBtnRef.current?.removeEventListener("pointerleave", () =>
+        fgGameController.handlePointerLeave("buttons", endGameBtnRef),
+      );
+    };
+  }, [contentRef, endGameBtnRef]);
+
   return (
     <motion.div
       ref={gameRef}
-      onPointerEnter={() =>
-        fgGameController.handlePointerEnter("main", gameRef)
-      }
-      onPointerLeave={() =>
-        fgGameController.handlePointerLeave("main", gameRef)
-      }
       className={`fg-game ${
         hideControls && !reactionsPanelActive ? "z-[5] cursor-none" : "z-[49]"
       } ${
@@ -351,6 +384,7 @@ export default function FgGame({
         gameFunctionsSection={gameFunctionsSection}
         players={players}
         positioning={positioning}
+        fgGameController={fgGameController}
       />
       <div
         className={`${(positioning.current.scale.x / 100) * (tableTopRef.current?.clientWidth ?? 1) <= 140 ? "justify-end" : "justify-between overflow-x-auto"} fg-game-top-controls-section hide-scroll-bar absolute bottom-full left-0 flex h-[15%] max-h-16 min-h-10 w-full items-center space-x-2`}
@@ -366,12 +400,22 @@ export default function FgGame({
             (players?.user === undefined ? 0 : 1)
           }
           positioning={positioning}
+          fgGameController={fgGameController}
         />
         {(positioning.current.scale.x / 100) *
           (tableTopRef.current?.clientWidth ?? 1) >
           94 && (
           <div className="flex h-full w-max items-end justify-center">
-            <div className="aspect-square h-[75%] pb-1">
+            <div
+              ref={reactBtnRef}
+              className="aspect-square h-[75%] pb-1"
+              onPointerEnter={() =>
+                fgGameController.handlePointerEnter("buttons", reactBtnRef)
+              }
+              onPointerLeave={() =>
+                fgGameController.handlePointerLeave("buttons", reactBtnRef)
+              }
+            >
               <ReactButton
                 reactionsPanelActive={reactionsPanelActive}
                 setReactionsPanelActive={setReactionsPanelActive}
@@ -381,7 +425,10 @@ export default function FgGame({
                 }
               />
             </div>
-            <EndGameButton closeGameFunction={closeGameFunction} />
+            <EndGameButton
+              externalRef={endGameBtnRef}
+              closeGameFunction={closeGameFunction}
+            />
           </div>
         )}
       </div>
@@ -407,6 +454,13 @@ export default function FgGame({
       )}
       {!selected && (
         <div
+          ref={overlayRef}
+          onPointerEnter={() =>
+            fgGameController.handlePointerEnter("main", overlayRef)
+          }
+          onPointerLeave={() =>
+            fgGameController.handlePointerLeave("main", overlayRef)
+          }
           className="pointer-events-auto absolute inset-0 bg-opacity-15"
           onClick={() => setSelected(true)}
         ></div>

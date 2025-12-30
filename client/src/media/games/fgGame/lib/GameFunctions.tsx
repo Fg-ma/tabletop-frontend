@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import PlayersSection from "./playersSection/PlayersSection";
 import FgSVGElement from "../../../../elements/fgSVGElement/FgSVGElement";
+import FgGameController from "./FgGameController";
 
 const nginxAssetServerBaseUrl = process.env.NGINX_ASSET_SERVER_BASE_URL;
 
@@ -11,6 +12,7 @@ export default function GameFunctions({
   gameFunctionsSection,
   players,
   positioning,
+  fgGameController,
 }: {
   tableTopRef: React.RefObject<HTMLDivElement>;
   gameFunctionsSection: React.ReactNode[] | undefined;
@@ -37,8 +39,10 @@ export default function GameFunctions({
     };
     rotation: number;
   }>;
+  fgGameController: FgGameController;
 }) {
   const [hover, setHover] = useState(false);
+  const gameFunctionsSectionRef = useRef<HTMLDivElement>(null);
 
   const slice = Math.max(
     1,
@@ -55,7 +59,22 @@ export default function GameFunctions({
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
     >
-      <div className="flex h-max w-full flex-col items-center justify-center space-y-2 px-2">
+      <div
+        ref={gameFunctionsSectionRef}
+        onPointerEnter={() =>
+          fgGameController.handlePointerEnter(
+            "buttons",
+            gameFunctionsSectionRef,
+          )
+        }
+        onPointerLeave={() =>
+          fgGameController.handlePointerLeave(
+            "buttons",
+            gameFunctionsSectionRef,
+          )
+        }
+        className="flex h-max w-full flex-col items-center justify-center space-y-2 px-2"
+      >
         {gameFunctionsSection && gameFunctionsSection[0]}
         {gameFunctionsSection &&
           gameFunctionsSection.length > 1 &&
@@ -80,7 +99,9 @@ export default function GameFunctions({
       {((positioning.current.scale.y / 100) *
         (tableTopRef.current?.clientHeight ?? 1) >
         192 ||
-        hover) && <PlayersSection players={players} />}
+        hover) && (
+        <PlayersSection players={players} fgGameController={fgGameController} />
+      )}
     </div>
   );
 }

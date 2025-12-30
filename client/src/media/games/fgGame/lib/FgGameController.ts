@@ -27,6 +27,7 @@ class FgGameController {
     scale: false,
     rotate: false,
     popup: false,
+    buttons: false,
   };
 
   constructor(
@@ -304,7 +305,7 @@ class FgGameController {
   };
 
   handlePointerLeave = (
-    type: "main" | "scale" | "pan" | "rotate" | "popup",
+    type: "main" | "scale" | "pan" | "rotate" | "popup" | "buttons",
     ref: React.RefObject<HTMLDivElement | HTMLElement | HTMLButtonElement>,
   ) => {
     this.hoveringOver[type] = false;
@@ -339,7 +340,7 @@ class FgGameController {
   };
 
   handlePointerEnter = (
-    type: "main" | "scale" | "pan" | "rotate" | "popup",
+    type: "main" | "scale" | "pan" | "rotate" | "popup" | "buttons",
     ref: React.RefObject<HTMLDivElement | HTMLElement | HTMLButtonElement>,
   ) => {
     this.hoveringOver[type] = true;
@@ -364,7 +365,7 @@ class FgGameController {
 
   handlePointerMove = (
     e: Event,
-    type: "main" | "scale" | "pan" | "rotate" | "popup",
+    type: "main" | "scale" | "pan" | "rotate" | "popup" | "buttons",
   ) => {
     const event = e as PointerEvent;
 
@@ -408,7 +409,6 @@ class FgGameController {
       this.movementTimeout.current = setTimeout(() => {
         clearTimeout(this.movementTimeout.current);
         this.movementTimeout.current = undefined;
-
         this.setHideControls(true);
 
         if (this.popupRefs) {
@@ -417,7 +417,7 @@ class FgGameController {
               ref.current?.classList.add("hide-controls");
           });
         }
-      }, 1250);
+      }, 5000);
     }
   };
 

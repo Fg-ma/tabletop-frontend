@@ -124,6 +124,7 @@ function SnakeGame({
         gameType="snake"
         gameStarted={started}
         sharedBundleRef={sharedBundleRef}
+        contentRef={boardRef}
         content={
           <div
             ref={boardRef}

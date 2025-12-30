@@ -11,11 +11,13 @@ const defaultFgGameButtonOptions = {
 };
 
 export default function FgGameButton({
+  externalRef,
   className,
   clickFunction,
   hoverContent,
   options,
 }: {
+  externalRef?: React.RefObject<HTMLButtonElement>;
   className?: string;
   clickFunction?: (event: React.MouseEvent) => void;
   hoverContent?: React.ReactElement;
@@ -69,6 +71,7 @@ export default function FgGameButton({
 
   return (
     <FgButton
+      externalRef={externalRef}
       className={className}
       clickFunction={clickFunction}
       hoverContent={hoverContent}

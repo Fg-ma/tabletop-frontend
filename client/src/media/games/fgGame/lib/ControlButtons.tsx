@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import FgGameButton from "../../../../elements/fgGameButton/FgGameButton";
 import FgHoverContentStandard from "../../../../elements/fgHoverContentStandard/FgHoverContentStandard";
+import FgGameController from "./FgGameController";
 
 export default function ControlButtons({
   tableTopRef,
@@ -10,6 +11,7 @@ export default function ControlButtons({
   userPlaying,
   playerCount,
   positioning,
+  fgGameController,
 }: {
   tableTopRef: React.RefObject<HTMLDivElement>;
   startGameFunction?: () => void;
@@ -28,8 +30,54 @@ export default function ControlButtons({
     };
     rotation: number;
   }>;
+  fgGameController: FgGameController;
 }) {
   const [hover, setHover] = useState(false);
+  const startButtonRef = useRef<HTMLButtonElement>(null);
+  const joinButtonRef = useRef<HTMLButtonElement>(null);
+  const leaveButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    startButtonRef.current?.addEventListener("pointerenter", () =>
+      fgGameController.handlePointerEnter("buttons", startButtonRef),
+    );
+    startButtonRef.current?.addEventListener("pointerleave", () =>
+      fgGameController.handlePointerLeave("buttons", startButtonRef),
+    );
+    joinButtonRef.current?.addEventListener("pointerenter", () =>
+      fgGameController.handlePointerEnter("buttons", joinButtonRef),
+    );
+    joinButtonRef.current?.addEventListener("pointerleave", () =>
+      fgGameController.handlePointerLeave("buttons", joinButtonRef),
+    );
+    leaveButtonRef.current?.addEventListener("pointerenter", () =>
+      fgGameController.handlePointerEnter("buttons", leaveButtonRef),
+    );
+    leaveButtonRef.current?.addEventListener("pointerleave", () =>
+      fgGameController.handlePointerLeave("buttons", leaveButtonRef),
+    );
+
+    return () => {
+      startButtonRef.current?.removeEventListener("pointerenter", () =>
+        fgGameController.handlePointerEnter("popup", startButtonRef),
+      );
+      startButtonRef.current?.removeEventListener("pointerleave", () =>
+        fgGameController.handlePointerLeave("popup", startButtonRef),
+      );
+      joinButtonRef.current?.removeEventListener("pointerenter", () =>
+        fgGameController.handlePointerEnter("popup", joinButtonRef),
+      );
+      joinButtonRef.current?.removeEventListener("pointerleave", () =>
+        fgGameController.handlePointerLeave("popup", joinButtonRef),
+      );
+      leaveButtonRef.current?.removeEventListener("pointerenter", () =>
+        fgGameController.handlePointerEnter("popup", leaveButtonRef),
+      );
+      leaveButtonRef.current?.removeEventListener("pointerleave", () =>
+        fgGameController.handlePointerLeave("popup", leaveButtonRef),
+      );
+    };
+  }, [startButtonRef, joinButtonRef, leaveButtonRef]);
 
   return (
     <div
@@ -38,6 +86,7 @@ export default function ControlButtons({
       onPointerLeave={() => setHover(false)}
     >
       <FgGameButton
+        externalRef={startButtonRef}
         className={`${(positioning.current.scale.x / 100) * (tableTopRef.current?.clientWidth ?? 1) <= 140 ? "h-[26px]" : "h-full"} aspect-square`}
         clickFunction={startGameFunction}
         hoverContent={<FgHoverContentStandard content="Start (p)" />}
@@ -61,6 +110,7 @@ export default function ControlButtons({
           140) && (
         <>
           <FgGameButton
+            externalRef={joinButtonRef}
             className={`${(positioning.current.scale.x / 100) * (tableTopRef.current?.clientWidth ?? 1) <= 140 ? "my-2 h-[26px]" : "h-full"} aspect-square`}
             clickFunction={joinGameFunction}
             hoverContent={<FgHoverContentStandard content="Join game (j)" />}
@@ -73,6 +123,7 @@ export default function ControlButtons({
             }}
           />
           <FgGameButton
+            externalRef={leaveButtonRef}
             className={`${(positioning.current.scale.x / 100) * (tableTopRef.current?.clientWidth ?? 1) <= 140 ? "h-[26px]" : "h-full"} aspect-square`}
             clickFunction={leaveGameFunction}
             hoverContent={

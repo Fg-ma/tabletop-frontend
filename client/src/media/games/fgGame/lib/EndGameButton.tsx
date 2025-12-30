@@ -9,11 +9,14 @@ const closeIcon = nginxAssetServerBaseUrl + "svgs/closeIcon.svg";
 
 export default function EndGameButton({
   closeGameFunction,
+  externalRef,
 }: {
   closeGameFunction?: () => void;
+  externalRef?: React.RefObject<HTMLButtonElement>;
 }) {
   return (
     <FgButton
+      externalRef={externalRef}
       className="aspect-square h-[60%] rounded pb-3 pr-2"
       clickFunction={closeGameFunction}
       contentFunction={() => (
