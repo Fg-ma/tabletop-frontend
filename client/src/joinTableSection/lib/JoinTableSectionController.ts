@@ -32,6 +32,8 @@ import { GeneralSignals } from "../../context/signalContext/lib/typeConstant";
 
 const tableServerIp = process.env.TABLE_SERVER_IP;
 const tableServerPort = process.env.TABLE_SERVER_PORT;
+const gamesServerIp = process.env.GAMES_SERVER_IP;
+const gamesServerPort = process.env.GAMES_SERVER_PORT;
 
 class JoinTableSectionController {
   constructor(
@@ -187,7 +189,7 @@ class JoinTableSectionController {
         this.tableId.current,
         this.username.current,
         this.instance.current,
-        "wss://localhost:7223",
+        `wss://${gamesServerIp}:${gamesServerPort}/ws/${this.tableId.current}/${this.username.current}/${this.instance.current}/signaling`,
         this.staticContentMedia,
         this.bundlesController,
       );

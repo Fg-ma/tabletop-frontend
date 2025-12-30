@@ -159,16 +159,28 @@ class SnakeGameMedia extends GameMediaUniversalFunctions {
   connect = () => {
     this.ws = new WebSocket(this.url);
 
-    this.ws.onmessage = (event) => {
-      const message = JSON.parse(event.data);
+    this.ws.onmessage = async (event) => {
+      let rawData: string;
 
+      if (event.data instanceof Blob) {
+        rawData = await event.data.text();
+      } else {
+        rawData = event.data;
+      }
+
+      let message: SnakeGameListenerTypes;
+      try {
+        message = JSON.parse(rawData);
+      } catch (err) {
+        console.error("Invalid JSON from WebSocket:", rawData);
+        return;
+      }
       this.snakeGameListeners.forEach((listener) => {
         listener(message);
       });
     };
 
     this.ws.onopen = () => {
-      this.newGameSocket();
       this.getInitialGameStates();
     };
   };

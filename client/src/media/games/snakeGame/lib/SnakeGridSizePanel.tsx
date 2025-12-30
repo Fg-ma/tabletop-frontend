@@ -9,6 +9,7 @@ export default function SnakeGridSizePanel({
   started,
   snakeGridSizeButtonRef,
   setGridSizePanelActive,
+  gridSize,
   setGridSize,
 }: {
   externalRef: React.RefObject<HTMLDivElement>;
@@ -16,6 +17,7 @@ export default function SnakeGridSizePanel({
   started: boolean;
   snakeGridSizeButtonRef: React.RefObject<HTMLButtonElement>;
   setGridSizePanelActive: React.Dispatch<React.SetStateAction<boolean>>;
+  gridSize: number;
   setGridSize: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const { staticContentMedia } = useMediaContext();
@@ -39,7 +41,7 @@ export default function SnakeGridSizePanel({
             }}
             disabled={started}
             options={{
-              initValue: 15,
+              initValue: gridSize,
               bottomLabel: "Grid size",
               labelsColor: "#f2f2f2",
               ticks: 6,

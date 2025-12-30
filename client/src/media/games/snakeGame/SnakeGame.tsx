@@ -333,6 +333,7 @@ function SnakeGame({
           snakeGameId={snakeGameId}
           snakeGridSizeButtonRef={snakeGridSizeButtonRef}
           setGridSizePanelActive={setGridSizePanelActive}
+          gridSize={gridSize}
           setGridSize={setGridSize}
         />
       )}

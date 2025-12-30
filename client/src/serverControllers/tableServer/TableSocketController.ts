@@ -55,10 +55,6 @@ class TableSocketController {
         listener(message as IncomingTableMessages);
       });
     };
-
-    this.ws.onopen = () => {
-      this.joinTable();
-    };
   };
 
   addMessageListener = (
@@ -77,28 +73,6 @@ class TableSocketController {
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify(message));
     }
-  };
-
-  joinTable = () => {
-    this.sendMessage({
-      type: "joinTable",
-      header: {
-        tableId: this.tableId,
-        username: this.username,
-        instance: this.instance,
-      },
-    });
-  };
-
-  leaveTable = () => {
-    this.sendMessage({
-      type: "leaveTable",
-      header: {
-        tableId: this.tableId,
-        username: this.username,
-        instance: this.instance,
-      },
-    });
   };
 
   changeTableBackground = (background: FgBackground) => {

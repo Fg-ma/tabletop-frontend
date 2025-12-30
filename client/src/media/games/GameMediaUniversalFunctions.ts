@@ -3,27 +3,6 @@ import { SnakeColorsType } from "./snakeGame/lib/typeConstant";
 
 type OutGoingUniversalMessages =
   | {
-      type: "newGameSocket";
-      header: {
-        tableId: string;
-        username: string;
-        instance: string;
-        gameType: GameTypes;
-        gameId: string;
-      };
-    }
-  | {
-      type: "leaveTable";
-      header: {
-        tableId: string;
-        username: string;
-        instance: string;
-        socketType: "games";
-        gameType: GameTypes;
-        gameId: string;
-      };
-    }
-  | {
       type: "startGame";
       header: {
         tableId: string;
@@ -96,33 +75,6 @@ class GameMediaUniversalFunctions {
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify(message));
     }
-  };
-
-  newGameSocket = () => {
-    this.sendUniversalMessage({
-      type: "newGameSocket",
-      header: {
-        tableId: this.tableId,
-        username: this.username,
-        instance: this.instance,
-        gameType: this.gameType,
-        gameId: this.gameId,
-      },
-    });
-  };
-
-  leaveTable = () => {
-    this.sendUniversalMessage({
-      type: "leaveTable",
-      header: {
-        tableId: this.tableId,
-        username: this.username,
-        instance: this.instance,
-        socketType: "games",
-        gameType: this.gameType,
-        gameId: this.gameId,
-      },
-    });
   };
 
   startGame = () => {

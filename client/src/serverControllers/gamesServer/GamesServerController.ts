@@ -10,9 +10,13 @@ import {
 } from "./lib/typeConstant";
 import { GameTypes } from "../../../../universal/contentTypeConstant";
 
+const gamesServerIp = process.env.GAMES_SERVER_IP;
+const gamesServerPort = process.env.GAMES_SERVER_PORT;
+
 class GamesServerController {
   protected ws: WebSocket | undefined;
-  private messageListeners: Set<(message: MessageEvent) => void> = new Set();
+  private messageListeners: Set<(message: IncomingMessages) => void> =
+    new Set();
 
   constructor(
     private tableId: string,
@@ -27,10 +31,6 @@ class GamesServerController {
 
   deconstructor = () => {
     if (this.ws) {
-      if (this.ws.readyState === WebSocket.OPEN) {
-        this.leaveTable();
-      }
-
       this.ws.close();
       this.ws.onmessage = null;
       this.ws.onopen = null;
@@ -44,25 +44,40 @@ class GamesServerController {
   private connect = (url: string) => {
     this.ws = new WebSocket(url);
 
-    this.ws.onmessage = (event: MessageEvent) => {
-      const message = JSON.parse(event.data);
+    this.ws.onmessage = async (event: MessageEvent) => {
+      let rawData: string;
+
+      if (event.data instanceof Blob) {
+        rawData = await event.data.text();
+      } else {
+        rawData = event.data;
+      }
+
+      let message: IncomingMessages;
+      try {
+        message = JSON.parse(rawData);
+      } catch (err) {
+        console.error("Invalid JSON from WebSocket:", rawData);
+        return;
+      }
 
       this.handleMessage(message);
-      this.messageListeners.forEach((listener) => {
-        listener(event);
-      });
-    };
 
-    this.ws.onopen = () => {
-      this.joinTable();
+      this.messageListeners.forEach((listener) => {
+        listener(message);
+      });
     };
   };
 
-  addMessageListener = (listener: (message: MessageEvent) => void): void => {
+  addMessageListener = (
+    listener: (message: IncomingMessages) => void,
+  ): void => {
     this.messageListeners.add(listener);
   };
 
-  removeMessageListener = (listener: (message: MessageEvent) => void): void => {
+  removeMessageListener = (
+    listener: (message: IncomingMessages) => void,
+  ): void => {
     this.messageListeners.delete(listener);
   };
 
@@ -102,7 +117,7 @@ class GamesServerController {
           this.username,
           this.instance,
           gameId,
-          "https://localhost:7223",
+          `wss://${gamesServerIp}:${gamesServerPort}/ws/${this.tableId}/${this.username}/${this.instance}/games/${gameType}/${gameId}`,
           initiator.username === this.username &&
             initiator.instance === this.instance,
         );
@@ -156,7 +171,7 @@ class GamesServerController {
             this.username,
             this.instance,
             activeGame.gameId,
-            "https://localhost:7223",
+            `wss://${gamesServerIp}:${gamesServerPort}/ws/${this.tableId}/${this.username}/${this.instance}/games/${activeGame.gameType}/${activeGame.gameId}`,
             false,
             activeGame.positioning,
           );
@@ -166,29 +181,6 @@ class GamesServerController {
           break;
         }
       }
-    });
-  };
-
-  joinTable = () => {
-    this.sendMessage({
-      type: "joinTable",
-      header: {
-        tableId: this.tableId,
-        username: this.username,
-        instance: this.instance,
-      },
-    });
-  };
-
-  leaveTable = () => {
-    this.sendMessage({
-      type: "leaveTable",
-      header: {
-        tableId: this.tableId,
-        username: this.username,
-        instance: this.instance,
-        socketType: "signaling",
-      },
     });
   };
 

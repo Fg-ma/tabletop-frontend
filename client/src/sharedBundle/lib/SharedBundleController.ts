@@ -1,6 +1,7 @@
 import { IncomingVideoMessages } from "src/serverControllers/videoServer/lib/typeConstant";
 import { IncomingTableStaticContentMessages } from "../../serverControllers/tableStaticContentServer/lib/typeConstant";
 import SharedBundleSocket from "./SharedBundleSocket";
+import { IncomingMessages } from "src/serverControllers/gamesServer/lib/typeConstant";
 
 class SharedBundleController extends SharedBundleSocket {
   constructor(
@@ -9,10 +10,8 @@ class SharedBundleController extends SharedBundleSocket {
     super();
   }
 
-  gameSignalingListener = (event: { data: string }) => {
-    const message = JSON.parse(event.data);
-
-    switch (message.type) {
+  gameSignalingListener = (event: IncomingMessages) => {
+    switch (event.type) {
       case "gameClosed":
         this.setRerender((prev) => !prev);
         break;
@@ -22,7 +21,7 @@ class SharedBundleController extends SharedBundleSocket {
       case "gameInitiated":
         setTimeout(() => {
           this.setRerender((prev) => !prev);
-        }, 100);
+        }, 500);
         break;
       default:
         break;

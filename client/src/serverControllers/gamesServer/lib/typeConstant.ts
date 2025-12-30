@@ -1,29 +1,8 @@
 import { GameTypes } from "../../../../../universal/contentTypeConstant";
 
 export type OutGoingMessages =
-  | onJoinTableType
-  | onLeaveTableType
   | onInitiateGameType
   | onUpdateContentPositioningType;
-
-type onJoinTableType = {
-  type: "joinTable";
-  header: {
-    tableId: string;
-    username: string;
-    instance: string;
-  };
-};
-
-type onLeaveTableType = {
-  type: "leaveTable";
-  header: {
-    tableId: string;
-    username: string;
-    instance: string;
-    socketType: "signaling";
-  };
-};
 
 type onInitiateGameType = {
   type: "initiateGame";

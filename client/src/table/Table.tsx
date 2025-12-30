@@ -206,7 +206,7 @@ export default function Table({
                     : { height: "100%" }),
                 }}
               >
-                <BabylonLayer />
+                {/* <BabylonLayer /> */}
                 <SelectTableLayer
                   innerTableContainerRef={innerTableContainerRef}
                   tableRef={tableRef}
@@ -214,13 +214,13 @@ export default function Table({
                 />
                 <UploadTableLayer tableTopRef={tableTopRef} />
                 <NewInstancesLayer tableRef={tableRef} />
-                <PlaceLittleBuddyLayer tableRef={tableRef} />
+                {/* <PlaceLittleBuddyLayer tableRef={tableRef} />
                 <LittleBuddiesLayer littleBuddy="rottingZombie" />
                 <LittleBuddiesLayer littleBuddy="zombie" />
                 <LittleBuddiesLayer littleBuddy="pinkSlime" />
                 <LittleBuddiesLayer littleBuddy="wizard" />
                 <LittleBuddiesLayer littleBuddy="bloodyZombie" />
-                <LittleBuddiesLayer littleBuddy="headlessZombie" />
+                <LittleBuddiesLayer littleBuddy="headlessZombie" /> */}
                 {gridActive && (
                   <TableGridOverlay
                     gridSize={gridSize}
