@@ -175,6 +175,7 @@ class SnakeGameMedia extends GameMediaUniversalFunctions {
         console.error("Invalid JSON from WebSocket:", rawData);
         return;
       }
+
       this.snakeGameListeners.forEach((listener) => {
         listener(message);
       });

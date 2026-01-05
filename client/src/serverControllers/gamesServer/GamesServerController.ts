@@ -170,13 +170,13 @@ class GamesServerController {
             this.tableId,
             this.username,
             this.instance,
-            activeGame.gameId,
-            `wss://${gamesServerIp}:${gamesServerPort}/ws/${this.tableId}/${this.username}/${this.instance}/games/${activeGame.gameType}/${activeGame.gameId}`,
+            activeGame._id.gameId,
+            `wss://${gamesServerIp}:${gamesServerPort}/ws/${this.tableId}/${this.username}/${this.instance}/games/${activeGame.gameType}/${activeGame._id.gameId}`,
             false,
             activeGame.positioning,
           );
 
-          this.staticContentMedia.current.games.snake[activeGame.gameId] =
+          this.staticContentMedia.current.games.snake[activeGame._id.gameId] =
             snakeGameMedia;
           break;
         }

@@ -66,8 +66,11 @@ export type onUserJoinedTableType = {
   type: "userJoinedTable";
   data: {
     activeGames: {
+      _id: {
+        tableId: string;
+        gameId: string;
+      };
       gameType: GameTypes;
-      gameId: string;
       positioning: {
         position: {
           left: number;
