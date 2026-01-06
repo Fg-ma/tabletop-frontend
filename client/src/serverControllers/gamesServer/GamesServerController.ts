@@ -199,7 +199,6 @@ class GamesServerController {
   };
 
   updateContentPositioning = (
-    gameType: GameTypes,
     gameId: string,
     positioning: {
       position?: {
@@ -217,7 +216,6 @@ class GamesServerController {
       type: "updateContentPositioning",
       header: {
         tableId: this.tableId,
-        gameType,
         gameId,
       },
       data: {

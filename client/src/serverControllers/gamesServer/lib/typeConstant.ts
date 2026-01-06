@@ -20,7 +20,6 @@ type onUpdateContentPositioningType = {
   type: "updateContentPositioning";
   header: {
     tableId: string;
-    gameType: GameTypes;
     gameId: string;
   };
   data: {

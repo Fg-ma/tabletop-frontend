@@ -91,7 +91,7 @@ export default function FgGame({
   }) => void;
   contentRef?: React.RefObject<HTMLDivElement>;
 }) {
-  const { tableId } = useUserInfoContext();
+  const { tableId, username } = useUserInfoContext();
   const { userDataStreams, remoteDataStreams } = useMediaContext();
   const { mediasoupSocket, tableSocket } = useSocketContext();
   const { addGroupSignalListener, removeGroupSignalListener } =
@@ -368,10 +368,12 @@ export default function FgGame({
       transition={GameTransition}
     >
       <div className="pointer-events-none absolute left-0 top-0 h-full w-full">
-        <div
-          ref={frontEffectsContainerRef}
-          className="pointer-events-none relative z-[100] h-full w-full"
-        />
+        {(!gameStarted || !players?.user) && (
+          <div
+            ref={frontEffectsContainerRef}
+            className="pointer-events-none relative z-[100] h-full w-full"
+          />
+        )}
       </div>
       <div className="pointer-events-none absolute left-0 top-0 h-full w-full">
         <div

@@ -1410,7 +1410,8 @@ export type FgBackground =
   | { category: "neon"; categorySelection: NeonCategories | "" }
   | { category: "pixelArt"; categorySelection: PixelArtCategories | "" }
   | { category: "space"; categorySelection: SpaceCategories | "" }
-  | { category: "technology"; categorySelection: TechnologyCategories | "" };
+  | { category: "technology"; categorySelection: TechnologyCategories | "" }
+  | { category: ""; categorySelection: "" };
 
 export const categoriesMetadata: {
   [category in Categories]: { label: string; url: string };

@@ -1,5 +1,8 @@
 import CaptureMedia from "../../media/capture/CaptureMedia";
-import { FgBackground } from "../../elements/fgBackgroundSelector/lib/typeConstant";
+import {
+  FgBackground,
+  categories,
+} from "../../elements/fgBackgroundSelector/lib/typeConstant";
 import { IncomingTableMessages } from "../../serverControllers/tableServer/lib/typeConstant";
 import UserDevice from "../../tools/userDevice/UserDevice";
 import Deadbanding from "../../babylon/Deadbanding";
@@ -11,6 +14,7 @@ import { GeneralSignals } from "../../context/signalContext/lib/typeConstant";
 
 class TableFunctionsController {
   constructor(
+    private tableTopRef: React.RefObject<HTMLDivElement>,
     private externalBackgroundChange: React.MutableRefObject<boolean>,
     private setTableBackground: React.Dispatch<
       React.SetStateAction<FgBackground | undefined>
@@ -35,6 +39,41 @@ class TableFunctionsController {
       case "tableBackgroundChanged":
         this.externalBackgroundChange.current = true;
         this.setTableBackground(message.data.background);
+
+        const category = message.data.background.category;
+        const categorySelection = message.data.background.categorySelection;
+
+        if (!this.tableTopRef.current) {
+          return;
+        }
+
+        if (categorySelection === "") {
+          this.tableTopRef.current.style.imageRendering = "";
+          this.tableTopRef.current.style.backgroundImage = "";
+          this.tableTopRef.current.style.backgroundSize = "";
+          this.tableTopRef.current.style.backgroundPosition = "";
+          this.tableTopRef.current.style.backgroundRepeat = "";
+          return;
+        }
+
+        if (category !== "") {
+          const background =
+            // @ts-expect-error: correlation error
+            categories[category]?.[categorySelection];
+
+          this.tableTopRef.current.style.backgroundImage = background
+            ? // prettier-ignore
+              `url(${background.url})`
+            : "";
+          if (background.pixelated) {
+            this.tableTopRef.current.style.imageRendering = "pixelated";
+          } else {
+            this.tableTopRef.current.style.imageRendering = "auto";
+          }
+        }
+        this.tableTopRef.current.style.backgroundSize = "cover";
+        this.tableTopRef.current.style.backgroundPosition = "center";
+        this.tableTopRef.current.style.backgroundRepeat = "no-repeat";
         break;
       default:
         break;

@@ -121,6 +121,7 @@ export default function TableFunctions({
 
   const tableFunctionsController = useRef(
     new TableFunctionsController(
+      tableTopRef,
       externalBackgroundChange,
       setTableBackground,
       setCaptureMediaActive,
