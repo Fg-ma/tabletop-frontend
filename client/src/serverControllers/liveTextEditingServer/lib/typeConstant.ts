@@ -1,30 +1,10 @@
 export type OutGoingLiveTextEditingMessages =
-  | onJoinTableType
-  | onLeaveTableType
   | onGetInitialDocStateType
   | onDocUpdateType
   | onGetSavedOpsType
   | onDocSaveType
   | onGetDownloadMetaType
   | onGetFileChunkType;
-
-type onJoinTableType = {
-  type: "joinTable";
-  header: {
-    tableId: string;
-    username: string;
-    instance: string;
-  };
-};
-
-type onLeaveTableType = {
-  type: "leaveTable";
-  header: {
-    tableId: string;
-    username: string;
-    instance: string;
-  };
-};
 
 type onGetInitialDocStateType = {
   type: "getInitialDocState";

@@ -32,6 +32,8 @@ import { GeneralSignals } from "../../context/signalContext/lib/typeConstant";
 
 const tableServerIp = process.env.TABLE_SERVER_IP;
 const tableServerPort = process.env.TABLE_SERVER_PORT;
+const liveTextEditingServerIp = process.env.LIVE_TEXT_EDITING_SERVER_IP;
+const liveTextEditingServerPort = process.env.LIVE_TEXT_EDITING_SERVER_PORT;
 const gamesServerIp = process.env.GAMES_SERVER_IP;
 const gamesServerPort = process.env.GAMES_SERVER_PORT;
 
@@ -141,7 +143,7 @@ class JoinTableSectionController {
       );
 
       this.liveTextEditingSocket.current = new LiveTextEditingSocketController(
-        "wss://localhost:7334",
+        `wss://${liveTextEditingServerIp}:${liveTextEditingServerPort}/ws/${this.tableId.current}/${this.username.current}/${this.instance.current}`,
         this.tableId.current,
         this.username.current,
         this.instance.current,

@@ -166,9 +166,6 @@ class LiveTextEditingSocketController {
       }
     };
 
-    this.ws.onopen = () => {
-      this.joinTable();
-    };
     this.ws.onclose = (event) => {
       console.warn("WebSocket closed", event.code, event.reason);
     };
@@ -283,28 +280,6 @@ class LiveTextEditingSocketController {
     message.set(data, 5 + headerLen);
 
     this.ws.send(message);
-  };
-
-  joinTable = () => {
-    this.sendMessage({
-      type: "joinTable",
-      header: {
-        tableId: this.tableId,
-        username: this.username,
-        instance: this.instance,
-      },
-    });
-  };
-
-  leaveTable = () => {
-    this.sendMessage({
-      type: "leaveTable",
-      header: {
-        tableId: this.tableId,
-        username: this.username,
-        instance: this.instance,
-      },
-    });
   };
 
   getInitialDocState = (contentId: string, instanceId: string) => {
