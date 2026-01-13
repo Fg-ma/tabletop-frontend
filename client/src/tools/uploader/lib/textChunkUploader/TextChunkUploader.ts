@@ -10,8 +10,9 @@ import ReasonableFileSizer from "../../../reasonableFileSizer.ts/ReasonableFileS
 import { GeneralSignals } from "../../../../context/signalContext/lib/typeConstant";
 import TableStaticContentSocketController from "../../../../serverControllers/tableStaticContentServer/TableStaticContentSocketController";
 
-const tableStaticContentServerBaseUrl =
-  process.env.TABLE_STATIC_CONTENT_SERVER_BASE_URL;
+const tableStaticContentServerIp = process.env.TABLE_STATIC_CONTENT_SERVER_IP;
+const tableStaticContentServerPort =
+  process.env.TABLE_STATIC_CONTENT_SERVER_PORT;
 
 export type ChunkedUploadListenerTypes =
   | { type: "uploadPaused" }
@@ -107,7 +108,7 @@ class TextChunkUploader {
 
     try {
       await fetch(
-        `${tableStaticContentServerBaseUrl}cancel-upload/${this.uploadId}/${this.contentId}/text`,
+        `https://${tableStaticContentServerIp}:${tableStaticContentServerPort}/cancel-upload/${this.uploadId}/${this.contentId}/text`,
         {
           method: "POST",
         },
@@ -192,7 +193,7 @@ class TextChunkUploader {
       try {
         this.currentChunkAbortController = new AbortController();
         const response = await fetch(
-          `${tableStaticContentServerBaseUrl}upload-chunk/${this.uploadId}/${this.contentId}/text`,
+          `https://${tableStaticContentServerIp}:${tableStaticContentServerPort}/upload-chunk/${this.uploadId}/${this.contentId}/text`,
           {
             method: "POST",
             body: formData,
@@ -297,8 +298,6 @@ class TextChunkUploader {
   retryUpload = async () => {
     this.uploadingState = "uploading";
 
-    if (!tableStaticContentServerBaseUrl) return;
-
     const metadata = {
       tableId: this.tableId.current,
       contentId: this.contentId,
@@ -312,7 +311,8 @@ class TextChunkUploader {
 
     try {
       const metaRes = await fetch(
-        tableStaticContentServerBaseUrl + "upload-chunk-meta",
+        `https://${tableStaticContentServerIp}:${tableStaticContentServerPort}/` +
+          "upload-chunk-meta",
         {
           method: "POST",
           headers: {

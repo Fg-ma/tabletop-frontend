@@ -17,8 +17,9 @@ import VideoChunkUploader from "./lib/videoChunkUploader/VideoChunkUploader";
 import VideoSocketController from "../../serverControllers/videoServer/VideoSocketController";
 import TableStaticContentSocketController from "../../serverControllers/tableStaticContentServer/TableStaticContentSocketController";
 
-const tableStaticContentServerBaseUrl =
-  process.env.TABLE_STATIC_CONTENT_SERVER_BASE_URL;
+const tableStaticContentServerIp = process.env.TABLE_STATIC_CONTENT_SERVER_IP;
+const tableStaticContentServerPort =
+  process.env.TABLE_STATIC_CONTENT_SERVER_PORT;
 const userStaticContentServerBaseUrl =
   process.env.USER_STATIC_CONTENT_SERVER_BASE_URL;
 const videoServerBaseUrl = process.env.VIDEO_SERVER_BASE_URL;
@@ -110,7 +111,7 @@ class Uploader {
             mimeType: file.type,
             filename: file.name,
           },
-          tableStaticContentServerBaseUrl!,
+          `https://${tableStaticContentServerIp}:${tableStaticContentServerPort}/`,
         );
       } else {
         this.oneShotUploader.handleOneShotFileUpload(
@@ -133,7 +134,7 @@ class Uploader {
           },
           file.type.startsWith("video/")
             ? videoServerBaseUrl!
-            : tableStaticContentServerBaseUrl!,
+            : `https://${tableStaticContentServerIp}:${tableStaticContentServerPort}/`,
           file.type.startsWith("video/") ? false : true,
         );
       }
@@ -183,7 +184,8 @@ class Uploader {
           const metaRes = await fetch(
             file.type.startsWith("video/")
               ? videoServerBaseUrl + "upload-chunk-meta"
-              : tableStaticContentServerBaseUrl + "upload-chunk-meta",
+              : `https://${tableStaticContentServerIp}:${tableStaticContentServerPort}/` +
+                  "upload-chunk-meta",
             {
               method: "POST",
               headers: {
@@ -300,8 +302,6 @@ class Uploader {
       return;
     }
 
-    if (!tableStaticContentServerBaseUrl) return;
-
     if (file.size < this.ONE_SHOT_FILE_SIZE_CUTOFF) {
       this.oneShotUploader.handleOneShotFileUpload(
         file,
@@ -312,7 +312,7 @@ class Uploader {
           mimeType: file.type,
           filename: file.name,
         },
-        tableStaticContentServerBaseUrl,
+        `https://${tableStaticContentServerIp}:${tableStaticContentServerPort}/`,
       );
     } else {
       const metadata = {
@@ -324,7 +324,8 @@ class Uploader {
 
       try {
         const metaRes = await fetch(
-          tableStaticContentServerBaseUrl + "upload-chunk-meta",
+          `https://${tableStaticContentServerIp}:${tableStaticContentServerPort}/` +
+            "upload-chunk-meta",
           {
             method: "POST",
             headers: {
