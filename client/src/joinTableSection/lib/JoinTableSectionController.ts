@@ -32,10 +32,13 @@ import { GeneralSignals } from "../../context/signalContext/lib/typeConstant";
 
 const tableServerIp = process.env.TABLE_SERVER_IP;
 const tableServerPort = process.env.TABLE_SERVER_PORT;
-const liveTextEditingServerIp = process.env.LIVE_TEXT_EDITING_SERVER_IP;
-const liveTextEditingServerPort = process.env.LIVE_TEXT_EDITING_SERVER_PORT;
 const gamesServerIp = process.env.GAMES_SERVER_IP;
 const gamesServerPort = process.env.GAMES_SERVER_PORT;
+const liveTextEditingServerIp = process.env.LIVE_TEXT_EDITING_SERVER_IP;
+const liveTextEditingServerPort = process.env.LIVE_TEXT_EDITING_SERVER_PORT;
+const tableStaticContentServerIp = process.env.TABLE_STATIC_CONTENT_SERVER_IP;
+const tableStaticContentServerPort =
+  process.env.TABLE_STATIC_CONTENT_SERVER_PORT;
 
 class JoinTableSectionController {
   constructor(
@@ -156,7 +159,7 @@ class JoinTableSectionController {
 
       this.tableStaticContentSocket.current =
         new TableStaticContentSocketController(
-          "wss://localhost:7889",
+          `wss://${tableStaticContentServerIp}:${tableStaticContentServerPort}/ws/${this.tableId.current}/${this.username.current}/${this.instance.current}`,
           this.tableId.current,
           this.username.current,
           this.instance.current,

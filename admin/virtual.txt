@@ -1,2 +1,2 @@
-ssh -L 5908:localhost:5908 n1@192.168.1.242
+ssh -L 5908:localhost:5908 n1@10.136.170.54
 vncviewer localhost:5908
