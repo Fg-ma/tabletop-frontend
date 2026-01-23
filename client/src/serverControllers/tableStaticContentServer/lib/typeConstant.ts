@@ -17,8 +17,6 @@ import {
 } from "../../../../../universal/effectsTypeConstant";
 
 export type OutGoingTableStaticContentMessages =
-  | onJoinTableType
-  | onLeaveTableType
   | onRequestCatchUpTableDataType
   | onDeleteContentType
   | onGetDownloadMetaType
@@ -31,24 +29,6 @@ export type OutGoingTableStaticContentMessages =
   | onSearchTabledContentRequestType
   | onDeleteUploadSessionType
   | onSignalReuploadStartType;
-
-type onJoinTableType = {
-  type: "joinTable";
-  header: {
-    tableId: string;
-    username: string;
-    instance: string;
-  };
-};
-
-type onLeaveTableType = {
-  type: "leaveTable";
-  header: {
-    tableId: string;
-    username: string;
-    instance: string;
-  };
-};
 
 type onRequestCatchUpTableDataType = {
   type: "requestCatchUpTableData";

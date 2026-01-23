@@ -55,8 +55,14 @@ class Uploader {
     private indexedDBController: React.MutableRefObject<IndexedDB>,
     private sendGeneralSignal: (signal: GeneralSignals) => void,
   ) {
-    this.oneShotUploader = new OneShotUploader(this.sendGeneralSignal);
-    this.textOneShotUploader = new TextOneShotUploader(this.sendGeneralSignal);
+    this.oneShotUploader = new OneShotUploader(
+      this.tableId,
+      this.sendGeneralSignal,
+    );
+    this.textOneShotUploader = new TextOneShotUploader(
+      this.tableId,
+      this.sendGeneralSignal,
+    );
   }
 
   uploadToTable = async (
@@ -190,6 +196,7 @@ class Uploader {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
+                "X-Table-Id": this.tableId.current,
               },
               body: JSON.stringify(metadata),
             },
@@ -330,6 +337,7 @@ class Uploader {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "X-Table-Id": this.tableId.current,
             },
             body: JSON.stringify(metadata),
           },
@@ -434,6 +442,7 @@ class Uploader {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "X-Table-Id": this.tableId.current,
             },
             body: JSON.stringify(metadata),
           },

@@ -340,7 +340,7 @@ class VideoSocketController {
           this.deadbanding,
           this.staticContentEffectsStyles,
           this.staticContentEffects,
-          initPositioning
+          initPositioning && Object.keys(initPositioning).length !== 0
             ? initPositioning
             : {
                 position: {

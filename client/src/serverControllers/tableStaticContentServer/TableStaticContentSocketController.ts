@@ -167,8 +167,6 @@ class TableStaticContentSocketController {
     };
 
     this.ws.onopen = () => {
-      this.joinTable();
-
       this.sendMessage({
         type: "requestCatchUpTableData",
         header: {
@@ -196,28 +194,6 @@ class TableStaticContentSocketController {
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify(message));
     }
-  };
-
-  joinTable = () => {
-    this.sendMessage({
-      type: "joinTable",
-      header: {
-        tableId: this.tableId,
-        username: this.username,
-        instance: this.instance,
-      },
-    });
-  };
-
-  leaveTable = () => {
-    this.sendMessage({
-      type: "leaveTable",
-      header: {
-        tableId: this.tableId,
-        username: this.username,
-        instance: this.instance,
-      },
-    });
   };
 
   getFile = (contentType: StaticContentTypes, contentId: string) => {
@@ -574,7 +550,7 @@ class TableStaticContentSocketController {
           this.staticContentEffects,
           this.userDevice,
           this.deadbanding,
-          initPositioning
+          initPositioning && Object.keys(initPositioning).length !== 0
             ? initPositioning
             : {
                 position: {
@@ -747,7 +723,7 @@ class TableStaticContentSocketController {
     if (!this.tableStaticContentSocket.current) return;
 
     const { images, svgs, videos, text, applications, soundClips } = event.data;
-
+    console.log(images);
     if (videos) {
       for (const video of videos) {
         const newVideoMedia = new TableVideoMedia(

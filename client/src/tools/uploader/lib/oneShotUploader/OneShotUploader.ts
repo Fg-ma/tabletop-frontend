@@ -1,7 +1,10 @@
 import { GeneralSignals } from "../../../../context/signalContext/lib/typeConstant";
 
 class OneShotUploader {
-  constructor(private sendGeneralSignal: (signal: GeneralSignals) => void) {}
+  constructor(
+    private tableId: React.MutableRefObject<string>,
+    private sendGeneralSignal: (signal: GeneralSignals) => void,
+  ) {}
 
   handleOneShotFileUpload = async (
     file: File,
@@ -17,6 +20,8 @@ class OneShotUploader {
       const xhr = new XMLHttpRequest();
 
       xhr.open("POST", baseUrl + `upload-one-shot-file`, true);
+
+      xhr.setRequestHeader("X-Table-Id", this.tableId.current);
 
       xhr.onload = () => {
         if (xhr.status === 413) {

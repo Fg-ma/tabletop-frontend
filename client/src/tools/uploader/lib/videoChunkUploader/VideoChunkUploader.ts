@@ -114,6 +114,9 @@ class VideoChunkUploader {
         `${videoServerBaseUrl}cancel-upload/${this.uploadId}/${this.contentId}`,
         {
           method: "POST",
+          headers: {
+            "X-Table-Id": this.tableId.current,
+          },
         },
       );
     } catch (e) {
@@ -182,6 +185,9 @@ class VideoChunkUploader {
             method: "POST",
             body: formData,
             signal: this.currentChunkAbortController.signal,
+            headers: {
+              "X-Table-Id": this.tableId.current,
+            },
           },
         );
         this.currentChunkAbortController = null;
@@ -306,6 +312,7 @@ class VideoChunkUploader {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-Table-Id": this.tableId.current,
         },
         body: JSON.stringify(metadata),
       });

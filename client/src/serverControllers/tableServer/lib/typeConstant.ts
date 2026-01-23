@@ -24,31 +24,11 @@ export type TableColors =
   | "tableTop";
 
 export type OutGoingTableMessages =
-  | onJoinTableType
-  | onLeaveTableType
   | onChangeTableBackgroundType
   | onMoveSeatsType
   | onSwapSeatsType
   | onKickFromTableType
   | onReactionType;
-
-type onJoinTableType = {
-  type: "joinTable";
-  header: {
-    tableId: string;
-    username: string;
-    instance: string;
-  };
-};
-
-type onLeaveTableType = {
-  type: "leaveTable";
-  header: {
-    tableId: string;
-    username: string;
-    instance: string;
-  };
-};
 
 type onChangeTableBackgroundType = {
   type: "changeTableBackground";

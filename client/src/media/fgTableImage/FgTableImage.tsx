@@ -53,7 +53,8 @@ export default function FgTableImage({
   const rightLowerImageControlsRef = useRef<HTMLDivElement>(null);
 
   const tintColor = useRef(
-    staticContentEffectsStyles.current.image[imageInstanceId].tint.color,
+    staticContentEffectsStyles.current.image[imageInstanceId]?.tint?.color ??
+      "",
   );
 
   const [_, setRerender] = useState(false);

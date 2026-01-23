@@ -110,6 +110,9 @@ class ChunkUploader {
         }`,
         {
           method: "POST",
+          headers: {
+            "X-Table-Id": this.tableId.current,
+          },
         },
       );
     } catch (e) {
@@ -174,6 +177,9 @@ class ChunkUploader {
             method: "POST",
             body: formData,
             signal: this.currentChunkAbortController.signal,
+            headers: {
+              "X-Table-Id": this.tableId.current,
+            },
           },
         );
         this.currentChunkAbortController = null;
@@ -292,6 +298,7 @@ class ChunkUploader {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "X-Table-Id": this.tableId.current,
           },
           body: JSON.stringify(metadata),
         },
