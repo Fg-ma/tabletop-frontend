@@ -7,8 +7,8 @@ const nginxAssetServerBaseUrl = process.env.NGINX_ASSET_SERVER_BASE_URL;
 
 const tableTopReducedLineIcon =
   nginxAssetServerBaseUrl + "svgs/tableTopReducedLineIcon.svg";
-const tableTopReducedTippedLineIcon =
-  nginxAssetServerBaseUrl + "svgs/tableTopReducedTippedLineIcon.svg";
+const tableTopReducedShrunkIcon =
+  nginxAssetServerBaseUrl + "svgs/tableTopReducedShrunkIcon.svg";
 
 export default function TabledSection({
   tabledActive,
@@ -25,9 +25,7 @@ export default function TabledSection({
         return (
           <FgSVGElement
             src={
-              tabledActive
-                ? tableTopReducedTippedLineIcon
-                : tableTopReducedLineIcon
+              tabledActive ? tableTopReducedShrunkIcon : tableTopReducedLineIcon
             }
             className="aspect-square h-full fill-fg-off-white stroke-fg-off-white"
             attributes={[

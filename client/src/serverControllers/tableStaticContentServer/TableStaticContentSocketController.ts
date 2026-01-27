@@ -110,15 +110,30 @@ class TableStaticContentSocketController {
 
       if (event.data instanceof ArrayBuffer) {
         const buf = new Uint8Array(event.data);
+
+        if (buf.byteLength < 4) {
+          return;
+        }
+
         const view = new DataView(buf.buffer);
 
         // 1) Read first 4 bytes for JSON length
         const headerLen = view.getUint32(0);
 
+        if (headerLen <= 0 || buf.byteLength < 4 + headerLen) {
+          return;
+        }
+
         // 2) Slice out the JSON header
         const headerBytes = buf.subarray(4, 4 + headerLen);
         const headerText = new TextDecoder().decode(headerBytes);
-        const header = JSON.parse(headerText);
+
+        let header;
+        try {
+          header = JSON.parse(headerText);
+        } catch (e) {
+          return;
+        }
 
         // 3) The rest of file chunk
         const fileBuffer = buf.subarray(4 + headerLen);
@@ -296,8 +311,8 @@ class TableStaticContentSocketController {
         instanceId,
       },
       data: {
-        effects,
-        effectStyles,
+        ...(effects !== undefined ? { effects } : {}),
+        ...(effectStyles !== undefined ? { effectStyles } : {}),
       },
     });
   };
@@ -612,7 +627,7 @@ class TableStaticContentSocketController {
           instanceId,
           this.staticContentEffectsStyles,
           this.staticContentEffects,
-          initPositioning
+          initPositioning && Object.keys(initPositioning).length !== 0
             ? initPositioning
             : {
                 position: {
@@ -670,7 +685,7 @@ class TableStaticContentSocketController {
           newTextMedia,
           this.staticContentEffectsStyles,
           instanceId,
-          initPositioning
+          initPositioning && Object.keys(initPositioning).length !== 0
             ? initPositioning
             : {
                 position: {
@@ -723,7 +738,7 @@ class TableStaticContentSocketController {
     if (!this.tableStaticContentSocket.current) return;
 
     const { images, svgs, videos, text, applications, soundClips } = event.data;
-    console.log(images);
+    console.log(event.data);
     if (videos) {
       for (const video of videos) {
         const newVideoMedia = new TableVideoMedia(
