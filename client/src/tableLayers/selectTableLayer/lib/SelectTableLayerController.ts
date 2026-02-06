@@ -169,8 +169,9 @@ class SelectTableLayerController {
     document.addEventListener("pointermove", this.handlePointerMove);
 
     const box = this.innerTableContainerRef.current?.getBoundingClientRect();
+    const box2 = this.tableTopRef.current?.getBoundingClientRect();
     this.dragStart.current = {
-      x: e.clientX - (box?.x ?? 0) + (this.tableRef.current?.scrollLeft ?? 0),
+      x: e.clientX - (box2?.x ?? 0) + (this.tableRef.current?.scrollLeft ?? 0),
       y: e.clientY - (box?.y ?? 0) + (this.tableRef.current?.scrollTop ?? 0),
     };
     this.dragEnd.current = undefined;
@@ -201,8 +202,9 @@ class SelectTableLayerController {
     if (!this.dragStart.current) return;
 
     const box = this.innerTableContainerRef.current?.getBoundingClientRect();
+    const box2 = this.tableTopRef.current?.getBoundingClientRect();
     const newDragEnd = {
-      x: e.clientX - (box?.x ?? 0) + (this.tableRef.current?.scrollLeft ?? 0),
+      x: e.clientX - (box2?.x ?? 0) + (this.tableRef.current?.scrollLeft ?? 0),
       y: e.clientY - (box?.y ?? 0) + (this.tableRef.current?.scrollTop ?? 0),
     };
 
@@ -321,6 +323,7 @@ class SelectTableLayerController {
 
     if (this.selectedInfo && this.selectedInfo.length) {
       const box = this.innerTableContainerRef.current?.getBoundingClientRect();
+      const box2 = this.tableTopRef.current?.getBoundingClientRect();
 
       this.sendGroupSignal({
         type: "groupDragStart",
@@ -329,7 +332,7 @@ class SelectTableLayerController {
           startDragPosition: {
             x:
               ((event.clientX -
-                (box?.x ?? 0) +
+                (box2?.x ?? 0) +
                 (this.tableRef.current?.scrollLeft ?? 0)) /
                 (this.tableTopRef.current?.clientWidth ?? 1)) *
               100,
@@ -348,6 +351,7 @@ class SelectTableLayerController {
   groupDrag = (event: PointerEvent) => {
     if (this.selectedInfo && this.selectedInfo.length) {
       const box = this.innerTableContainerRef.current?.getBoundingClientRect();
+      const box2 = this.tableTopRef.current?.getBoundingClientRect();
 
       this.sendGroupSignal({
         type: "groupDrag",
@@ -356,7 +360,7 @@ class SelectTableLayerController {
           dragPosition: {
             x:
               ((event.clientX -
-                (box?.x ?? 0) +
+                (box2?.x ?? 0) +
                 (this.tableRef.current?.scrollLeft ?? 0)) /
                 (this.tableTopRef.current?.clientWidth ?? 1)) *
               100,

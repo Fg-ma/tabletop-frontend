@@ -168,6 +168,17 @@ class VideoSocketController {
     });
   };
 
+  deleteContent = (contentId: string, instanceId: string) => {
+    this.sendMessage({
+      type: "deleteContent",
+      header: {
+        tableId: this.tableId,
+        contentId,
+        instanceId,
+      },
+    });
+  };
+
   getFile = (contentType: StaticContentTypes, contentId: string) => {
     this.sendMessage({
       type: "getDownloadMeta",

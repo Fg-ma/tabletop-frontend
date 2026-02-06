@@ -1,10 +1,20 @@
 export type OutGoingLiveTextEditingMessages =
+  | onDeleteContentType
   | onGetInitialDocStateType
   | onDocUpdateType
   | onGetSavedOpsType
   | onDocSaveType
   | onGetDownloadMetaType
   | onGetFileChunkType;
+
+type onDeleteContentType = {
+  type: "deleteContent";
+  header: {
+    tableId: string;
+    contentId: string;
+    instanceId: string;
+  };
+};
 
 type onGetInitialDocStateType = {
   type: "getInitialDocState";

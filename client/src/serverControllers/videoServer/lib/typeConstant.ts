@@ -7,6 +7,7 @@ import {
 export type OutGoingVideoMessages =
   | onJoinTableType
   | onLeaveTableType
+  | onDeleteContentType
   | onGetDownloadMetaType
   | onGetFileChunkType
   | onUpdateVideoMetadataType
@@ -29,6 +30,15 @@ type onLeaveTableType = {
     tableId: string;
     username: string;
     instance: string;
+  };
+};
+
+type onDeleteContentType = {
+  type: "deleteContent";
+  header: {
+    tableId: string;
+    contentId: string;
+    instanceId: string;
   };
 };
 

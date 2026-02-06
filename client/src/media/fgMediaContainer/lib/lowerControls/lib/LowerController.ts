@@ -1,4 +1,6 @@
 import TableStaticContentSocketController from "../../../../../serverControllers/tableStaticContentServer/TableStaticContentSocketController";
+import LiveTextEditingSocketController from "../../../../../serverControllers/liveTextEditingServer/LiveTextEditingSocketController";
+import VideoSocketController from "../../../../../serverControllers/videoServer/VideoSocketController";
 import FgContentAdjustmentController from "../../../../../elements/fgAdjustmentElements/lib/FgContentAdjustmentControls";
 import { MediaContainerOptions } from "../../typeConstant";
 import {
@@ -18,6 +20,12 @@ class LowerController {
   constructor(
     private tableStaticContentSocket: React.MutableRefObject<
       TableStaticContentSocketController | undefined
+    >,
+    private liveTextEditingSocket: React.MutableRefObject<
+      LiveTextEditingSocketController | undefined
+    >,
+    private videoSocket: React.MutableRefObject<
+      VideoSocketController | undefined
     >,
     private mediaIdRef: React.MutableRefObject<string>,
     private mediaInstanceId: string,
@@ -276,6 +284,17 @@ class LowerController {
       this.mediaIdRef.current,
       this.mediaInstanceId,
     );
+    if (this.kind === "text") {
+      this.liveTextEditingSocket.current?.deleteContent(
+        this.mediaIdRef.current,
+        this.mediaInstanceId,
+      );
+    } else if (this.kind === "video") {
+      this.videoSocket.current?.deleteContent(
+        this.mediaIdRef.current,
+        this.mediaInstanceId,
+      );
+    }
   };
 
   handleTable = () => {

@@ -243,6 +243,7 @@ class Downloader {
       | IncomingTableStaticContentMessages
       | IncomingUserStaticContentMessages,
   ) => {
+    console.log(message);
     switch (message.type) {
       case "downloadMeta":
         this.onDownloadMeta(message);

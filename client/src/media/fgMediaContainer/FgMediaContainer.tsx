@@ -130,8 +130,13 @@ export default function FgMediaContainer({
   };
 
   const { userDataStreams, remoteDataStreams } = useMediaContext();
-  const { mediasoupSocket, tableStaticContentSocket, tableSocket } =
-    useSocketContext();
+  const {
+    mediasoupSocket,
+    tableStaticContentSocket,
+    tableSocket,
+    liveTextEditingSocket,
+    videoSocket,
+  } = useSocketContext();
   const { tableId } = useUserInfoContext();
   const {
     sendGroupSignal,
@@ -205,6 +210,8 @@ export default function FgMediaContainer({
   const lowerController = useRef(
     new LowerController(
       tableStaticContentSocket,
+      liveTextEditingSocket,
+      videoSocket,
       mediaIdRef,
       mediaInstanceId,
       kind,

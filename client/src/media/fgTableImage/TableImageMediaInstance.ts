@@ -112,19 +112,11 @@ class TableImageMediaInstance {
       };
 
       if (!this.babylonScene && this.instanceImage) {
-        this.babylonScene = new BabylonScene(
-          this.imageMedia.babylonRenderLoopWorker,
-          "image",
-          this.imageMedia.aspect ?? 1,
-          this.instanceCanvas,
-          this.instanceImage,
-          this.imageMedia.faceLandmarks,
-          this.effects,
-          this.imageMedia.faceMeshResults,
-          this.imageMedia.selfieSegmentationResults,
-          this.userDevice,
-          this.imageMedia.maxFaces,
-        );
+        if (!this.instanceImage.complete) {
+          this.instanceImage.onload = () => this.createBabylonScene();
+        } else {
+          this.createBabylonScene();
+        }
 
         if (this.imageMedia.detectedFaces[0] === 0)
           setTimeout(() => this.forceRedetectFaces(), 100);
@@ -133,6 +125,23 @@ class TableImageMediaInstance {
 
     this.imageMedia.addImageListener(this.handleImageMessages);
   }
+
+  private createBabylonScene = () => {
+    if (!this.babylonScene && this.instanceImage)
+      this.babylonScene = new BabylonScene(
+        this.imageMedia.babylonRenderLoopWorker,
+        "image",
+        this.imageMedia.aspect ?? 1,
+        this.instanceCanvas,
+        this.instanceImage,
+        this.imageMedia.faceLandmarks,
+        this.effects,
+        this.imageMedia.faceMeshResults,
+        this.imageMedia.selfieSegmentationResults,
+        this.userDevice,
+        this.imageMedia.maxFaces,
+      );
+  };
 
   deconstructor() {
     if (this.instanceImage) {
@@ -182,35 +191,47 @@ class TableImageMediaInstance {
       true,
     ) as HTMLImageElement;
 
-    this.instanceImage.onload = () => {
-      if (this.instanceImage) {
-        this.instanceCanvas.width = this.instanceImage.width;
-        this.instanceCanvas.height = this.instanceImage.height;
+    this.instanceImage.width = this.imageMedia.image?.width ?? 0;
+    this.instanceImage.height = this.imageMedia.image?.height ?? 0;
 
-        if (this.instanceImage.width > this.instanceImage.height) {
-          this.instanceCanvas.style.height = "auto";
-          this.instanceCanvas.style.width = "100%";
-        } else {
-          this.instanceCanvas.style.height = "100%";
-          this.instanceCanvas.style.width = "auto";
-        }
+    if (this.instanceImage) {
+      this.instanceCanvas.width = this.instanceImage.width;
+      this.instanceCanvas.height = this.instanceImage.height;
+
+      if (this.instanceImage.width > this.instanceImage.height) {
+        this.instanceCanvas.style.height = "auto";
+        this.instanceCanvas.style.width = "100%";
+      } else {
+        this.instanceCanvas.style.height = "100%";
+        this.instanceCanvas.style.width = "auto";
       }
-    };
+    }
+
+    if (!this.instanceImage.complete) {
+      this.instanceImage.onload = () => {
+        if (this.instanceImage) {
+          this.instanceCanvas.width = this.instanceImage.width;
+          this.instanceCanvas.height = this.instanceImage.height;
+
+          if (this.instanceImage.width > this.instanceImage.height) {
+            this.instanceCanvas.style.height = "auto";
+            this.instanceCanvas.style.width = "100%";
+          } else {
+            this.instanceCanvas.style.height = "100%";
+            this.instanceCanvas.style.width = "auto";
+          }
+        }
+      };
+    }
+
+    this.instanceImage.onload = () => {};
 
     if (!this.babylonScene && this.instanceImage) {
-      this.babylonScene = new BabylonScene(
-        this.imageMedia.babylonRenderLoopWorker,
-        "image",
-        this.imageMedia.aspect ?? 1,
-        this.instanceCanvas,
-        this.instanceImage,
-        this.imageMedia.faceLandmarks,
-        this.effects,
-        this.imageMedia.faceMeshResults,
-        this.imageMedia.selfieSegmentationResults,
-        this.userDevice,
-        this.imageMedia.maxFaces,
-      );
+      if (!this.instanceImage.complete) {
+        this.instanceImage.onload = () => this.createBabylonScene();
+      } else {
+        this.createBabylonScene();
+      }
 
       if (this.imageMedia.detectedFaces[0] === 0)
         setTimeout(() => this.forceRedetectFaces(), 100);

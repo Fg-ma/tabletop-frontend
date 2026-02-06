@@ -155,15 +155,16 @@ export default function SelectTableLayer({
     }
 
     const box = innerTableContainerRef.current?.getBoundingClientRect();
-    minLeft = minLeft - (box?.x ?? 0) + (tableRef.current?.scrollLeft ?? 0);
-    maxRight = maxRight - (box?.x ?? 0) + (tableRef.current?.scrollLeft ?? 0);
+    const box2 = tableTopRef.current?.getBoundingClientRect();
+    minLeft = minLeft - (box2?.x ?? 0) + (tableRef.current?.scrollLeft ?? 0);
+    maxRight = maxRight - (box2?.x ?? 0) + (tableRef.current?.scrollLeft ?? 0);
     minTop = minTop - (box?.y ?? 0) + (tableRef.current?.scrollTop ?? 0);
     maxBottom = maxBottom - (box?.y ?? 0) + (tableRef.current?.scrollTop ?? 0);
 
-    const left = minLeft - 7;
-    const top = minTop - 7;
-    const width = maxRight - minLeft + 10;
-    const height = maxBottom - minTop + 10;
+    const left = minLeft - 6;
+    const top = minTop - 8;
+    const width = maxRight - minLeft + 12;
+    const height = maxBottom - minTop + 12;
 
     selectedStyle = { left, top, width, height };
   }

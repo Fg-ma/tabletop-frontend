@@ -282,6 +282,17 @@ class LiveTextEditingSocketController {
     this.ws.send(message);
   };
 
+  deleteContent = (contentId: string, instanceId: string) => {
+    this.sendMessage({
+      type: "deleteContent",
+      header: {
+        tableId: this.tableId,
+        contentId,
+        instanceId,
+      },
+    });
+  };
+
   getInitialDocState = (contentId: string, instanceId: string) => {
     this.sendMessage({
       type: "getInitialDocState",

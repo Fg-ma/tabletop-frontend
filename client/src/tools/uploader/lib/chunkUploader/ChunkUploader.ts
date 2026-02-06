@@ -163,9 +163,9 @@ class ChunkUploader {
       const start = Date.now();
 
       const formData = new FormData();
-      formData.append("chunk", chunk);
       formData.append("chunkIndex", chunkIndex.toString());
       formData.append("totalChunks", totalChunks.toString());
+      formData.append("file", chunk);
 
       try {
         this.currentChunkAbortController = new AbortController();

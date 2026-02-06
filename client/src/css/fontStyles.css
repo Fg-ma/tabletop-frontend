@@ -1,338 +1,338 @@
 @font-face {
   font-family: "Josefin";
-  src: url("https://10.136.170.54:7084/fonts/josefinSans/static/JosefinSans-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/josefinSans/static/JosefinSans-Regular.ttf");
 }
 
 @font-face {
   font-family: "K2D";
-  src: url("https://10.136.170.54:7084/fonts/K2D/K2D-Bold.ttf");
+  src: url("https://10.136.98.22:7084/fonts/K2D/K2D-Bold.ttf");
 }
 
 @font-face {
   font-family: "B612Mono";
-  src: url("https://10.136.170.54:7084/fonts/B612Mono/B612Mono-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/B612Mono/B612Mono-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "AnnieUseYourTelescope";
-  src: url("https://10.136.170.54:7084/fonts/annieUseYourTelescope/AnnieUseYourTelescope-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/annieUseYourTelescope/AnnieUseYourTelescope-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Ballet";
-  src: url("https://10.136.170.54:7084/fonts/ballet/Ballet-Regular-VariableFont_opsz.ttf");
+  src: url("https://10.136.98.22:7084/fonts/ballet/Ballet-Regular-VariableFont_opsz.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Barrio";
-  src: url("https://10.136.170.54:7084/fonts/barrio/Barrio-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/barrio/Barrio-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Borel";
-  src: url("https://10.136.170.54:7084/fonts/borel/Borel-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/borel/Borel-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "BrunoAceSC";
-  src: url("https://10.136.170.54:7084/fonts/brunoAceSC/BrunoAceSC-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/brunoAceSC/BrunoAceSC-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Butcherman";
-  src: url("https://10.136.170.54:7084/fonts/butcherman/Butcherman-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/butcherman/Butcherman-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "CaesarDressing";
-  src: url("https://10.136.170.54:7084/fonts/caesarDressing/CaesarDressing-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/caesarDressing/CaesarDressing-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Combo";
-  src: url("https://10.136.170.54:7084/fonts/combo/Combo-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/combo/Combo-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Delius";
-  src: url("https://10.136.170.54:7084/fonts/delius/Delius-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/delius/Delius-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "EagleLake";
-  src: url("https://10.136.170.54:7084/fonts/eagleLake/EagleLake-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/eagleLake/EagleLake-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Ewert";
-  src: url("https://10.136.170.54:7084/fonts/ewert/Ewert-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/ewert/Ewert-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Flavors";
-  src: url("https://10.136.170.54:7084/fonts/flavors/Flavors-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/flavors/Flavors-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "FontdinerSwanky";
-  src: url("https://10.136.170.54:7084/fonts/fontdinerSwanky/FontdinerSwanky-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/fontdinerSwanky/FontdinerSwanky-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "FunnelSans";
-  src: url("https://10.136.170.54:7084/fonts/funnelSans/FunnelSans-VariableFont_wght.ttf");
+  src: url("https://10.136.98.22:7084/fonts/funnelSans/FunnelSans-VariableFont_wght.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "GrenzeGotisch";
-  src: url("https://10.136.170.54:7084/fonts/grenzeGotisch/GrenzeGotisch-VariableFont_wght.ttf");
+  src: url("https://10.136.98.22:7084/fonts/grenzeGotisch/GrenzeGotisch-VariableFont_wght.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Honk";
-  src: url("https://10.136.170.54:7084/fonts/honk/Honk-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/honk/Honk-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "ImperialScript";
-  src: url("https://10.136.170.54:7084/fonts/imperialScript/ImperialScript-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/imperialScript/ImperialScript-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Kablammo";
-  src: url("https://10.136.170.54:7084/fonts/kablammo/Kablammo-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/kablammo/Kablammo-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Knewave";
-  src: url("https://10.136.170.54:7084/fonts/knewave/Knewave-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/knewave/Knewave-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Limelight";
-  src: url("https://10.136.170.54:7084/fonts/limelight/Limelight-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/limelight/Limelight-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "MacondoSwashCaps";
-  src: url("https://10.136.170.54:7084/fonts/macondoSwashCaps/MacondoSwashCaps-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/macondoSwashCaps/MacondoSwashCaps-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "MajorMonoDisplay";
-  src: url("https://10.136.170.54:7084/fonts/majorMonoDisplay/MajorMonoDisplay-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/majorMonoDisplay/MajorMonoDisplay-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Mansalva";
-  src: url("https://10.136.170.54:7084/fonts/mansalva/Mansalva-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/mansalva/Mansalva-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "MarkaziText";
-  src: url("https://10.136.170.54:7084/fonts/markaziText/MarkaziText-VariableFont_wght.ttf");
+  src: url("https://10.136.98.22:7084/fonts/markaziText/MarkaziText-VariableFont_wght.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "MetalMania";
-  src: url("https://10.136.170.54:7084/fonts/metalMania/MetalMania-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/metalMania/MetalMania-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Monofett";
-  src: url("https://10.136.170.54:7084/fonts/monofett/Monofett-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/monofett/Monofett-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Nabla";
-  src: url("https://10.136.170.54:7084/fonts/nabla/Nabla-Regular-VariableFont_EDPT,EHLT.ttf");
+  src: url("https://10.136.98.22:7084/fonts/nabla/Nabla-Regular-VariableFont_EDPT,EHLT.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Orbitron";
-  src: url("https://10.136.170.54:7084/fonts/orbitron/Orbitron-VariableFont_wght.ttf");
+  src: url("https://10.136.98.22:7084/fonts/orbitron/Orbitron-VariableFont_wght.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "PirataOne";
-  src: url("https://10.136.170.54:7084/fonts/pirataOne/PirataOne-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/pirataOne/PirataOne-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Plaster";
-  src: url("https://10.136.170.54:7084/fonts/plaster/Plaster-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/plaster/Plaster-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "PlaywriteITModerna";
-  src: url("https://10.136.170.54:7084/fonts/playwriteITModerna/PlaywriteITModerna-VariableFont_wght.ttf");
+  src: url("https://10.136.98.22:7084/fonts/playwriteITModerna/PlaywriteITModerna-VariableFont_wght.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "PressStart2P";
-  src: url("https://10.136.170.54:7084/fonts/pressStart2P/PressStart2P-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/pressStart2P/PressStart2P-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Quicksand";
-  src: url("https://10.136.170.54:7084/fonts/quicksand/Quicksand-VariableFont_wght.ttf");
+  src: url("https://10.136.98.22:7084/fonts/quicksand/Quicksand-VariableFont_wght.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "RampartOne";
-  src: url("https://10.136.170.54:7084/fonts/rampartOne/RampartOne-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/rampartOne/RampartOne-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "RedHatDisplay";
-  src: url("https://10.136.170.54:7084/fonts/redHatDisplay/RedHatDisplay-VariableFont_wght.ttf");
+  src: url("https://10.136.98.22:7084/fonts/redHatDisplay/RedHatDisplay-VariableFont_wght.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Roboto";
-  src: url("https://10.136.170.54:7084/fonts/roboto/Roboto-VariableFont_wdth,wght.ttf");
+  src: url("https://10.136.98.22:7084/fonts/roboto/Roboto-VariableFont_wdth,wght.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "ShadowsIntoLightTwo";
-  src: url("https://10.136.170.54:7084/fonts/shadowsIntoLightTwo/ShadowsIntoLightTwo-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/shadowsIntoLightTwo/ShadowsIntoLightTwo-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "SixtyfourConvergence";
-  src: url("https://10.136.170.54:7084/fonts/sixtyfourConvergence/SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
+  src: url("https://10.136.98.22:7084/fonts/sixtyfourConvergence/SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Slackey";
-  src: url("https://10.136.170.54:7084/fonts/slackey/Slackey-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/slackey/Slackey-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "TiltPrism";
-  src: url("https://10.136.170.54:7084/fonts/tiltPrism/TiltPrism-Regular-VariableFont_XROT,YROT.ttf");
+  src: url("https://10.136.98.22:7084/fonts/tiltPrism/TiltPrism-Regular-VariableFont_XROT,YROT.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Tourney";
-  src: url("https://10.136.170.54:7084/fonts/tourney/Tourney-VariableFont_wdth,wght.ttf");
+  src: url("https://10.136.98.22:7084/fonts/tourney/Tourney-VariableFont_wdth,wght.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "TradeWinds";
-  src: url("https://10.136.170.54:7084/fonts/tradeWinds/TradeWinds-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/tradeWinds/TradeWinds-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "UnifrakturMaguntia";
-  src: url("https://10.136.170.54:7084/fonts/unifrakturMaguntia/UnifrakturMaguntia-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/unifrakturMaguntia/UnifrakturMaguntia-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Wallpoet";
-  src: url("https://10.136.170.54:7084/fonts/wallpoet/Wallpoet-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/wallpoet/Wallpoet-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "WalterTurncoat";
-  src: url("https://10.136.170.54:7084/fonts/walterTurncoat/WalterTurncoat-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/walterTurncoat/WalterTurncoat-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "ZenTokyoZoo";
-  src: url("https://10.136.170.54:7084/fonts/zenTokyoZoo/ZenTokyoZoo-Regular.ttf");
+  src: url("https://10.136.98.22:7084/fonts/zenTokyoZoo/ZenTokyoZoo-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }

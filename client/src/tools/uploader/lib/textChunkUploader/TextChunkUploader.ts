@@ -177,6 +177,7 @@ class TextChunkUploader {
         (this.offset + 1) * this.CHUNK_SIZE,
         this.fullUpdateUpload.length,
       );
+      const chunkIndex = this.offset;
       const chunk = this.fullUpdateUpload.slice(
         this.offset * this.CHUNK_SIZE,
         end,
@@ -190,7 +191,7 @@ class TextChunkUploader {
         "chunk",
         new Blob([chunk], { type: "application/octet-stream" }),
       );
-      formData.append("chunkIndex", this.offset.toString());
+      formData.append("chunkIndex", chunkIndex.toString());
       formData.append("totalChunks", totalChunks);
 
       try {
